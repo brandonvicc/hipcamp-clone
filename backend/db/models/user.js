@@ -47,20 +47,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
-  User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
+  User.prototype.toSafeObject = function(){ // remember, this cannot be an arrow function
     const { id, username, email } = this; // context will be the User instance
     return { id, username, email };
   };
 
-  User.prototype.validatePassword = (password) => {
+  User.prototype.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.hashedPassword.toString());
   };
 
-  User.getCurrentUserById = async(id)=>{
+  User.getCurrentUserById = async function(id){
     return await User.scope('currentUser').findByPk(id);
   };
 
-  User.login = async({credential, password}) =>{
+  User.login = async function({credential, password}){
     const {Op} = require('sequelize');
     const loginUser = await User.scope('loginUser').findOne({
       where: {
@@ -70,12 +70,13 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     });
+
     if(loginUser && loginUser.validatePassword(password)) {
-      return await User.scope('currentUser').findByPk(user.id);
+      return await User.scope('currentUser').findByPk(loginUser.id);
     };
   };
 
-  User.signup = async ({username, email, password}) =>{
+  User.signup = async function ({username, email, password}){
     const hashedPassword = bcrypt.hashSync(password, 10);
     const newUser = await User.create({
       username,
