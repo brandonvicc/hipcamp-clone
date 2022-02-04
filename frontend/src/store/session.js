@@ -74,6 +74,7 @@ const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case ADD_SESSION_USER:
+      if (action.user === undefined) return { ...state };
       newState = { user: { ...action.user } };
       return newState;
     case REMOVE_USER:
