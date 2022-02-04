@@ -54,7 +54,7 @@ export const signupUser = (payload) => async (dispatch, getState) => {
   return response;
 };
 
-export const deleteSession = () => async (dispatch, getState) => {
+export const logout = () => async (dispatch, getState) => {
   const response = await csrfFetch("/api/session", {
     method: "DELETE",
   });
