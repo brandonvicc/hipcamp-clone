@@ -1,4 +1,6 @@
 /* TODO Add site wide styles */
 body {
   background-color: rgb(243, 242, 239);
+  font-family: Calibre, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
 }
