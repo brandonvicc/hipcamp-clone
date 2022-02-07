@@ -1,6 +1,8 @@
 import "./ActionCard.css";
 
-const ActionCard = ({ url, content, color }) => {
+import { NavLink } from "react-router-dom";
+
+const ActionCard = ({ url, content, color, actionUrl }) => {
   let bgColor;
   color !== "" ? (bgColor = "mustard") : (bgColor = "purple");
 
@@ -11,7 +13,9 @@ const ActionCard = ({ url, content, color }) => {
         <p className="card-content-heading">{content.heading}</p>
         <div className="card-bottom-content">
           <h3>{content.content}</h3>
-          <button className="card-explore-btn">Explore</button>
+          <NavLink>
+            <button className="card-explore-btn">Explore</button>
+          </NavLink>
         </div>
       </div>
     </div>
