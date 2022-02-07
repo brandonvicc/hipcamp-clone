@@ -48,7 +48,7 @@ const HomeBookForm = () => {
           src={
             "https://images.unsplash.com/photo-1532339142463-fd0a8979791a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
           }
-          alt="camping picture"
+          alt="campingsite"
         />
       </div>
     </div>

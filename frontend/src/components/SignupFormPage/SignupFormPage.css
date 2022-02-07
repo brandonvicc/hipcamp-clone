@@ -1,5 +1,6 @@
 h1 {
   text-align: center;
+  margin-bottom: -50px;
   color: rgb(15, 56, 6);
 }
 
@@ -11,16 +12,10 @@ h1 {
   gap: 20px;
   background-color: rgb(255, 255, 255);
   width: 400px;
-  margin: 50px auto;
+  margin: 100px auto;
   padding: 15px;
   border-radius: 25px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 label input {

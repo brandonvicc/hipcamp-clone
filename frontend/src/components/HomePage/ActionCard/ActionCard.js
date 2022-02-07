@@ -6,7 +6,7 @@ const ActionCard = ({ url, content, color }) => {
 
   return (
     <div className="card-container">
-      <img className="card-img" src={url} alt="camp image" />
+      <img className="card-img" src={url} alt="campsite" />
       <div className={`card-content ${bgColor}`}>
         <p className="card-content-heading">{content.heading}</p>
         <div className="card-bottom-content">
