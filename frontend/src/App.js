@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage/HomePage";
 import SpotsFormPage from "./components/SpotsFormPage/SpotsFormPage";
 import SpotReadOne from "./components/SpotReadOne/SpotReadOne";
+import SpotsViewAll from "./components/SpotsViewAll/SpotsViewAll";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path={"/spots/:id"}>
             <SpotReadOne />
+          </Route>
+          <Route path={"/spots/"}>
+            <SpotsViewAll />
           </Route>
         </Switch>
       )}
