@@ -1,16 +1,10 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import * as spotActions from "../../store/spot";
 
 const SpotReadOne = () => {
-  // const dispatch = useDispatch();
-  const { id } = useParams;
-  const spot = useSelector((state) => state.spot[id]);
-
-  useEffect(() => {
-    // dispatch(spotActions.loadOne(id));
-  }, []);
+  const { id } = useParams();
+  const spots = useSelector((state) => state.spot);
+  const spot = spots[id];
 
   return (
     <div className="spot-one-container">

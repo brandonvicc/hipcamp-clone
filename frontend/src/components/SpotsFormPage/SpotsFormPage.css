@@ -1,0 +1,12 @@
+.steps-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+.spots-form-page-container {
+  margin: 0 auto;
+  width: 80%;
+}

@@ -7,7 +7,7 @@ const SpotsForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const sessionSpot = useSelector((state) => state.spot.id);
+  const sessionSpot = useSelector((state) => state.spot);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -39,12 +39,9 @@ const SpotsForm = () => {
       })
     )
       .then((data) => {
-        data.json();
-      })
-      .then((data) => {
-        console.log(sessionSpot);
+        // console.log(sessionSpot);
         console.log(data);
-        history.push(`/spots/${sessionSpot}`);
+        history.push(`/spots/${data.id}`);
       })
       .catch(async (res) => {
         const data = await res.json();

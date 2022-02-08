@@ -23,6 +23,7 @@ export const createSpot = (payload) => async (dispatch, getState) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(addSpot(data.spot));
+    return data.spot;
   }
   return response;
 };
@@ -51,7 +52,7 @@ const spotReducer = (state = initialState, action) => {
     case ADD:
       newState = {};
       if (!state[action.spot.id]) {
-        newState = { ...state, [action.spot.id]: { ...action.spot } };
+        newState = { [action.spot.id]: { ...action.spot } };
         return newState;
       }
       return state;
