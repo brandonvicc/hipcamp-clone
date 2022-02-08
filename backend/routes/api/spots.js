@@ -78,4 +78,12 @@ router.post(
   })
 );
 
+router.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    const allSpots = await Spot.getAll();
+    return res.json(allSpots);
+  })
+);
+
 module.exports = router;
