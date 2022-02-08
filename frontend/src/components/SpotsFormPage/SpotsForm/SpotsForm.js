@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as spotActions from "../../../store/spot";
 
 const SpotsForm = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -20,14 +19,10 @@ const SpotsForm = () => {
 
   if (!sessionUser) return <Redirect to="/" />;
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-
-    console.log(typeof img_link);
-    console.log(img_link);
     setErrors([]);
-
-    const newSpot = await dispatch(
+    return dispatch(
       spotActions.createSpot({
         name,
         address,
@@ -40,17 +35,20 @@ const SpotsForm = () => {
         img_link,
         user_id: sessionUser.id,
       })
-    );
-    if (newSpot) {
-      console.log(newSpot);
-      //   history.push(`/spots/${newSpot.id}`);
-      history.push(`/spots/new`);
-    }
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
   };
 
   return (
     <div className="spot-form-container">
       <form onSubmit={handleClick}>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <div className="spot-form-input-container">
           <label htmlFor="name">Name of the Spot</label>
           <input
