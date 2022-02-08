@@ -8,7 +8,6 @@ const SpotsViewAll = () => {
   const spots = useSelector((state) => state.spot.list);
 
   const dispatch = useDispatch();
-  console.log(spots);
 
   useEffect(() => {
     dispatch(spotActions.getSpots());
