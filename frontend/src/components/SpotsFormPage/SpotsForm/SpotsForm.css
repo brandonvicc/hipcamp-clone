@@ -1,0 +1,95 @@
+.spot-form-container {
+  width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(6, 75px);
+  grid-template-areas:
+    "a a a"
+    "b b b"
+    "c d e"
+    "f g h"
+    "i i i"
+    "z z z";
+}
+
+.spot-form-input-container {
+  padding: 5px;
+}
+
+.spot-form-input-container label {
+  font-size: 1.1em;
+}
+
+.spots-input-control {
+  border: none;
+  padding: 10px;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  /* font-size: 13px; */
+}
+
+.spots-input-control:focus {
+  outline: none;
+  border: 2px solid rgba(0, 197, 133, 1);
+}
+
+.spot-form-marginbtm {
+  margin-bottom: 100px;
+}
+
+#spots-long-input-name {
+  width: 98%;
+}
+#spots-long-input-address {
+  width: 98%;
+}
+#spots-long-input-imgLink {
+  width: 98%;
+}
+
+.spot-name {
+  grid-area: a;
+}
+
+.spot-address {
+  grid-area: b;
+}
+
+.spot-city {
+  grid-area: c;
+}
+.spot-state {
+  grid-area: d;
+}
+.spot-country {
+  grid-area: e;
+}
+.spot-price {
+  grid-area: f;
+}
+.spot-lat {
+  grid-area: g;
+}
+.spot-lng {
+  grid-area: h;
+}
+.spot-img {
+  grid-area: i;
+}
+.spot-lng {
+  grid-area: h;
+}
+
+.spot-btn {
+  grid-area: z;
+  border: none;
+  background-color: rgba(0, 197, 133, 1);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 200px;
+  margin: 0 auto;
+  height: 50px;
+}

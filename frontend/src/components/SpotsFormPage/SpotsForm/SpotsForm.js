@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import * as spotActions from "../../../store/spot";
+import "./SpotsForm.css";
 
 const SpotsForm = () => {
   const history = useHistory();
@@ -50,105 +51,110 @@ const SpotsForm = () => {
   };
 
   return (
-    <div className="spot-form-container">
-      <form onSubmit={handleClick}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <div className="spot-form-input-container">
+    <div className="spot-form-marginbtm">
+      <ul>
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
+      <form onSubmit={handleClick} className="spot-form-container">
+        <div className="spot-form-input-container spot-name">
           <label htmlFor="name">Name of the Spot</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="name"
+            id="spots-long-input-name"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-address">
           <label htmlFor="address">Street Address</label>
           <input
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="address"
+            id="spots-long-input-address"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-city">
           <label htmlFor="city">City</label>
           <input
             value={city}
             onChange={(e) => setCity(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="city"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-state">
           <label htmlFor="state">State</label>
           <input
             value={state}
             onChange={(e) => setState(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="state"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-country">
           <label htmlFor="country">Country</label>
           <input
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="country"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-price">
           <label htmlFor="price">How much per Night?</label>
           <input
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="number"
             name="price"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-lat">
           <label htmlFor="lat">Latitude Coordinates</label>
           <input
             value={lat}
             onChange={(e) => setLat(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="number"
             name="lat"
           />
         </div>
-        <div className="spot-form-input-container">
-          <label htmlFor="lng">Longitutde Coordinates</label>
+        <div className="spot-form-input-container spot-lng">
+          <label htmlFor="lng">Longitude Coordinates</label>
           <input
             value={lng}
             onChange={(e) => setLng(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="number"
             name="lng"
           />
         </div>
-        <div className="spot-form-input-container">
+        <div className="spot-form-input-container spot-img">
           <label htmlFor="img_link">Add a Picture</label>
           <input
             value={img_link}
             onChange={(e) => setImgLink(e.target.value)}
-            className="input-control"
+            className="spots-input-control"
             type="text"
             name="img_link"
             placeholder="Please put the link"
+            id="spots-long-input-imgLink"
           />
         </div>
-        <button type="submit">Add new Spot!</button>
+        <button type="submit" className="spot-btn">
+          Add new Spot!
+        </button>
       </form>
     </div>
   );
