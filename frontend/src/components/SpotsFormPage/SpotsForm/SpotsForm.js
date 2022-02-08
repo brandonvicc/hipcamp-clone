@@ -20,7 +20,7 @@ const SpotsForm = () => {
   const [img_link, setImgLink] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (!sessionUser) return <Redirect to="/" />;
+  if (!sessionUser) return <Redirect to="/login" />;
 
   const handleClick = (e) => {
     e.preventDefault();
