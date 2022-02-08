@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import * as spotActions from "../../../store/spot";
 
 const SpotsForm = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const sessionSpot = useSelector((state) => state.spot.id);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -35,10 +37,19 @@ const SpotsForm = () => {
         img_link,
         user_id: sessionUser.id,
       })
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    )
+      .then((data) => {
+        data.json();
+      })
+      .then((data) => {
+        console.log(sessionSpot);
+        console.log(data);
+        history.push(`/spots/${sessionSpot}`);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
 
   return (

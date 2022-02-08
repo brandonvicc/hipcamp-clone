@@ -83,6 +83,10 @@ module.exports = (sequelize, DataTypes) => {
     return Spot.findByPk(newSpot.id);
   };
 
+  Spot.getAll = async function () {
+    return await Spot.findAll();
+  };
+
   Spot.associate = function (models) {
     // associations can be defined here
     Spot.belongsTo(models.User, { foreignKey: "user_id" });
