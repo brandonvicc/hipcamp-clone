@@ -64,7 +64,7 @@ const spotReducer = (state = initialState, action) => {
       action.list.forEach((spot) => {
         newState[spot.id] = { ...spot };
       });
-      return { ...state, ...newState };
+      return { ...state, ...newState, list: action.list };
     default:
       return state;
   }

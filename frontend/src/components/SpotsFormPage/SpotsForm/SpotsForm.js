@@ -8,7 +8,6 @@ const SpotsForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  const sessionSpot = useSelector((state) => state.spot);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");

@@ -1,0 +1,29 @@
+.spot-card {
+  width: 300px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.spot-card-heading {
+  text-align: center;
+}
+.spot-card-list {
+  list-style: none;
+}
+
+.spot-card-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.spot-card-img {
+  width: 300px;
+}
+
+.spot-card-content a {
+  text-decoration: none;
+  color: rgb(15, 56, 6);
+}
+
+.spot-card-content a:hover {
+  color: rgba(0, 197, 133, 1);
+}
