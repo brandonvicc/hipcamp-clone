@@ -13,7 +13,7 @@ const ActionCard = ({ url, content, color, actionUrl }) => {
         <p className="card-content-heading">{content.heading}</p>
         <div className="card-bottom-content">
           <h3>{content.content}</h3>
-          <NavLink>
+          <NavLink to={actionUrl}>
             <button className="card-explore-btn">Explore</button>
           </NavLink>
         </div>
