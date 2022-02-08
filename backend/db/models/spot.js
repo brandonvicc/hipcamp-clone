@@ -44,7 +44,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [3, 150],
         },
       },
-      price: DataTypes.DECIMAL,
+      price: { type: DataTypes.DECIMAL, allowNull: false },
+      img_link: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 255],
+        },
+      },
     },
     {}
   );
@@ -59,6 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     name,
     price,
     user_id,
+    img_link,
   }) {
     const newSpot = await Spot.create({
       address,
@@ -70,6 +78,7 @@ module.exports = (sequelize, DataTypes) => {
       name,
       price,
       user_id,
+      img_link,
     });
     return Spot.findByPk(newSpot.id);
   };
