@@ -10,3 +10,29 @@
   margin: 0 auto;
   width: 80%;
 }
+
+/* extra info */
+
+.spots-extra-info {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+.spots-extra-info-img-container {
+  flex: 1;
+}
+
+.spots-extra-info-img {
+  width: 100%;
+}
+.spots-extra-content {
+  flex: 1;
+}
+
+.spots-extra-content p {
+  width: 87%;
+  line-height: 30px;
+}
