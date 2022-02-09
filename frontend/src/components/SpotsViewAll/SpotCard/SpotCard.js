@@ -1,12 +1,22 @@
 import "./SpotCard.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import * as spotActions from "../../../store/spot";
 
 const SpotCard = ({ spot }) => {
   const { name, img_link, price, city, state, id, user_id } = spot;
   const sessionUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {}, [dispatch]);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const deletedSpot = await dispatch(spotActions.deleteSpot(spot));
+    history.push("/spots");
+  };
 
   return (
     <div className="spot-card">
@@ -22,14 +32,16 @@ const SpotCard = ({ spot }) => {
           <li className="spot-card-item">
             {city}, {state}
           </li>
+          <NavLink to={`/spots/${id}`}>
+            <li>More Details</li>
+          </NavLink>
           {sessionUser.id === user_id && (
             <li>
-              <button onClick={() => dispatch(spotActions.deleteSpot(spot))}>
+              <button className="delete-spot" onClick={handleClick}>
                 Delete
               </button>
             </li>
           )}
-          <NavLink to={`/spots/${id}`}>More Details</NavLink>
         </ul>
       </div>
     </div>

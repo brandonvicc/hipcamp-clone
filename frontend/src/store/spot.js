@@ -64,6 +64,13 @@ const initialState = {};
 const spotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case REMOVE:
+      newState = { ...state };
+      delete newState[action.spot.id];
+      newState.list = newState.list.filter(
+        (spot) => spot.id !== action.spot.id
+      );
+      return newState;
     case ADD:
       newState = {};
       if (!state[action.spot.id]) {
@@ -80,10 +87,6 @@ const spotReducer = (state = initialState, action) => {
         newState[spot.id] = { ...spot };
       });
       return { ...state, ...newState, list: action.list };
-    case REMOVE:
-      newState = { ...state };
-      delete newState[action.spot.id];
-      return newState;
     default:
       return state;
   }

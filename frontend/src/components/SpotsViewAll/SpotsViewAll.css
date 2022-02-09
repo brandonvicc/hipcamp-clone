@@ -7,3 +7,13 @@
   align-items: center;
   gap: 70px;
 }
+
+.delete-spot {
+  border: none;
+  background-color: rgba(255, 0, 0, 1);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100px;
+}
