@@ -86,4 +86,12 @@ router.get(
   })
 );
 
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const deletedSpot = await Spot.deleteSpot(req.params.id);
+    return res.json(deletedSpot);
+  })
+);
+
 module.exports = router;

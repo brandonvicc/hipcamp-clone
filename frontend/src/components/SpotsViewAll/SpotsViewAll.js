@@ -26,6 +26,7 @@ const SpotsViewAll = () => {
             city={spot.city}
             state={spot.state}
             id={spot.id}
+            userId={spot.user_id}
           />
         ))}
       </div>

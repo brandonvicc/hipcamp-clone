@@ -87,6 +87,12 @@ module.exports = (sequelize, DataTypes) => {
     return await Spot.findAll();
   };
 
+  Spot.deleteSpot = async function (id) {
+    const spot = await Spot.findByPk(id);
+    if (!spot) throw new Error("No spot with that id");
+    await Spot.destroy({ where: { id } });
+  };
+
   Spot.associate = function (models) {
     // associations can be defined here
     Spot.belongsTo(models.User, { foreignKey: "user_id" });
