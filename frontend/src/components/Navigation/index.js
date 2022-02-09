@@ -26,9 +26,11 @@ function Navigation({ isLoaded }) {
   return (
     <nav className="navbar">
       <div className="logo-container">
-        <p className="logo">
-          iwanna<span>camp</span>
-        </p>
+        <NavLink className={"logo-link"} to={"/"}>
+          <p className="logo">
+            iwanna<span>camp</span>
+          </p>
+        </NavLink>
       </div>
       <ul className="nav-list">
         <li className="nav-list-item">
