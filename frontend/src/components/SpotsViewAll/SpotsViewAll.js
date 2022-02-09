@@ -17,7 +17,7 @@ const SpotsViewAll = () => {
     <div className="spots-view-all-container">
       <h1>View All Spots</h1>
       <div className="spots-all-container">
-        {spots.map((spot, i) => (
+        {spots?.map((spot, i) => (
           <SpotCard key={i} spot={spot} />
         ))}
       </div>

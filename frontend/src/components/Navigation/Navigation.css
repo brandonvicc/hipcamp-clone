@@ -77,3 +77,7 @@
   border-radius: 5px;
   width: 100px;
 }
+
+.nav-profile-btn:hover {
+  color: rgba(0, 197, 133, 1);
+}
