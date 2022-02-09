@@ -18,16 +18,7 @@ const SpotsViewAll = () => {
       <h1>View All Spots</h1>
       <div className="spots-all-container">
         {spots.map((spot, i) => (
-          <SpotCard
-            key={i}
-            name={spot.name}
-            img_link={spot.img_link}
-            price={spot.price}
-            city={spot.city}
-            state={spot.state}
-            id={spot.id}
-            userId={spot.user_id}
-          />
+          <SpotCard key={i} spot={spot} />
         ))}
       </div>
     </div>

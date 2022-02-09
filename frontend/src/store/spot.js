@@ -50,12 +50,11 @@ export const getSpots = () => async (dispatch, getState) => {
   }
 };
 
-export const deleteSpot = (id) => async (dispatch, getState) => {
-  const response = await csrfFetch(`/api/spots/${id}`, {
+export const deleteSpot = (spot) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots/${spot.id}`, {
     method: "DELETE",
   });
   if (response.ok) {
-    const spot = await response.json();
     dispatch(remove(spot));
   }
 };

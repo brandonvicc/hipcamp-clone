@@ -1,9 +1,13 @@
 import "./SpotCard.css";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as spotActions from "../../../store/spot";
 
-const SpotCard = ({ name, img_link, price, city, state, id, userId }) => {
+const SpotCard = ({ spot }) => {
+  const { name, img_link, price, city, state, id, user_id } = spot;
   const sessionUser = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+
   return (
     <div className="spot-card">
       <NavLink to={`/spots/${id}`}>
@@ -18,9 +22,11 @@ const SpotCard = ({ name, img_link, price, city, state, id, userId }) => {
           <li className="spot-card-item">
             {city}, {state}
           </li>
-          {sessionUser.id === userId && (
+          {sessionUser.id === user_id && (
             <li>
-              <button>Delete</button>
+              <button onClick={() => dispatch(spotActions.deleteSpot(spot))}>
+                Delete
+              </button>
             </li>
           )}
           <NavLink to={`/spots/${id}`}>More Details</NavLink>

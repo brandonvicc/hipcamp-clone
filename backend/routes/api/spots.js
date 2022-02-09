@@ -90,6 +90,7 @@ router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
     const deletedSpot = await Spot.deleteSpot(req.params.id);
+    console.log(deletedSpot);
     return res.json(deletedSpot);
   })
 );
