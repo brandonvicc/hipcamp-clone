@@ -88,15 +88,18 @@ router.get(
 
 router.delete(
   "/:id",
+  requireAuth,
+  spotValidation,
   asyncHandler(async (req, res) => {
     const deletedSpot = await Spot.deleteSpot(req.params.id);
-    console.log(deletedSpot);
     return res.json(deletedSpot);
   })
 );
 
 router.put(
   "/:id",
+  requireAuth,
+  spotValidation,
   asyncHandler(async (req, res) => {
     const id = await Spot.updateSpot(req.body);
     const spot = await Spot.getOne(id);
