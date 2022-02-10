@@ -14,8 +14,14 @@ const SpotCard = ({ spot }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const deletedSpot = await dispatch(spotActions.deleteSpot(spot));
+    await dispatch(spotActions.deleteSpot(spot));
     history.push("/spots");
+  };
+
+  const editClick = async (e) => {
+    e.preventDefault();
+    await dispatch(spotActions.loadOne(id));
+    history.push(`/spots/edit/${id}`);
   };
 
   return (
@@ -35,11 +41,16 @@ const SpotCard = ({ spot }) => {
           <NavLink to={`/spots/${id}`}>
             <li>More Details</li>
           </NavLink>
-          {sessionUser.id === user_id && (
+          {sessionUser?.id === user_id && (
             <li>
               <button className="delete-spot" onClick={handleClick}>
                 Delete
               </button>
+              {/* <NavLink to={`/spots/edit/${id}`}> */}
+              <button className="update-spot" onClick={editClick}>
+                Edit
+              </button>
+              {/* </NavLink> */}
             </li>
           )}
         </ul>

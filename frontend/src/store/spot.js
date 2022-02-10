@@ -4,6 +4,12 @@ const LOAD_ONE = "spot/LOAD_ONE";
 const LOAD_ALL = "spot/LOAD_ALL";
 const ADD = "spot/ADD";
 const REMOVE = "spot/REMOVE";
+const UPDATE = "spot/UPDATE";
+
+const update = (spot) => ({
+  type: UPDATE,
+  spot,
+});
 
 const remove = (spot) => ({
   type: REMOVE,
@@ -18,6 +24,11 @@ const addSpot = (spot) => ({
 const loadAll = (list) => ({
   type: LOAD_ALL,
   list,
+});
+
+const getOnespot = (spot) => ({
+  type: LOAD_ONE,
+  spot,
 });
 
 export const createSpot = (payload) => async (dispatch, getState) => {
@@ -36,9 +47,10 @@ export const createSpot = (payload) => async (dispatch, getState) => {
 
 export const loadOne = (id) => async (dispatch, getState) => {
   const response = await csrfFetch(`/api/spots/${id}`);
+
   if (response.ok) {
     const data = await response.json();
-    dispatch(addSpot(data.spot));
+    dispatch(getOnespot(data));
   }
 };
 
@@ -59,11 +71,30 @@ export const deleteSpot = (spot) => async (dispatch, getState) => {
   }
 };
 
+export const updateSpot = (payload) => async (dispatch, getState) => {
+  const response = await csrfFetch(`/api/spots/${payload.id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+
+  if (response.ok) {
+    const updatedSpot = await response.json();
+    dispatch(update(updatedSpot));
+    return updatedSpot;
+  }
+};
+
 const initialState = {};
 
 const spotReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case UPDATE:
+      newState = {
+        ...state,
+        [action.spot.id]: { ...action.spot },
+      };
+      return newState;
     case REMOVE:
       newState = { ...state };
       delete newState[action.spot.id];
@@ -86,7 +117,7 @@ const spotReducer = (state = initialState, action) => {
       action.list.forEach((spot) => {
         newState[spot.id] = { ...spot };
       });
-      return { ...state, ...newState, list: action.list };
+      return { ...newState, list: action.list };
     default:
       return state;
   }

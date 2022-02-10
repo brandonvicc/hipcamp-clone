@@ -95,4 +95,22 @@ router.delete(
   })
 );
 
+router.put(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const id = await Spot.updateSpot(req.body);
+    const spot = await Spot.getOne(id);
+    return res.json(spot);
+  })
+);
+
+router.get(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    const spot = await Spot.getOne(id);
+    return res.json(spot);
+  })
+);
+
 module.exports = router;
