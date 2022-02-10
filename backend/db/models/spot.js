@@ -87,10 +87,21 @@ module.exports = (sequelize, DataTypes) => {
     return await Spot.findAll();
   };
 
+  Spot.getOne = async function (id) {
+    return await Spot.findByPk(id);
+  };
+
   Spot.deleteSpot = async function (id) {
     const spot = await Spot.findByPk(id);
     if (!spot) throw new Error("No spot with that id");
     await Spot.destroy({ where: { id } });
+  };
+
+  Spot.updateSpot = async function (payload) {
+    const id = payload.id;
+    delete payload.id;
+    await Spot.update(payload, { where: { id }, returning: true, plain: true });
+    return id;
   };
 
   Spot.associate = function (models) {

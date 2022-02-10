@@ -1,31 +1,40 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
-import * as spotActions from "../../../store/spot";
-import "./SpotsForm.css";
+import { useEffect, useState } from "react";
+import { useParams, Redirect, useHistory } from "react-router-dom";
+import * as spotActions from "../../store/spot";
 
-const SpotsForm = () => {
-  const history = useHistory();
+const SpotEdit = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [price, setPrice] = useState(0.0);
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-  const [img_link, setImgLink] = useState("");
+  const spot = useSelector((state) => state.spot);
+
+  const [name, setName] = useState(spot.name);
+  const [address, setAddress] = useState(spot.address);
+  const [city, setCity] = useState(spot.city);
+  const [state, setState] = useState(spot.state);
+  const [country, setCountry] = useState(spot.country);
+  const [price, setPrice] = useState(spot.price);
+  const [lat, setLat] = useState(spot.lat);
+  const [lng, setLng] = useState(spot.lng);
+  const [img_link, setImgLink] = useState(spot.img_link);
   const [errors, setErrors] = useState([]);
 
-  if (!sessionUser) return <Redirect to="/login" />;
+  if (sessionUser.id !== spot.user_id) <Redirect to="/" />;
+
+  let loaded = false;
+
+  useEffect(() => {
+    dispatch(spotActions.loadOne(id));
+  }, [dispatch, id, loaded]);
 
   const handleClick = (e) => {
     e.preventDefault();
     setErrors([]);
     return dispatch(
-      spotActions.createSpot({
+      spotActions.updateSpot({
+        id: id,
         name,
         address,
         city,
@@ -42,13 +51,21 @@ const SpotsForm = () => {
         history.push(`/spots/${data.id}`);
       })
       .catch(async (res) => {
+        console.log(res);
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
   };
 
+  const isLoaded = async () => {
+    setTimeout(() => (loaded = true), 100);
+  };
+
+  isLoaded();
+
   return (
-    <div className="spot-form-marginbtm">
+    <div>
+      <h1>Edit a Spot</h1>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -150,11 +167,11 @@ const SpotsForm = () => {
           />
         </div>
         <button type="submit" className="spot-btn">
-          Add new Spot!
+          Edit your Spot
         </button>
       </form>
     </div>
   );
 };
 
-export default SpotsForm;
+export default SpotEdit;

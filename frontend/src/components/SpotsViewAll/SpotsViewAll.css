@@ -17,3 +17,13 @@
   border-radius: 5px;
   width: 100px;
 }
+.update-spot {
+  border: none;
+  background-color: rgba(0, 0, 255, 1);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100px;
+  margin-left: 20px;
+}

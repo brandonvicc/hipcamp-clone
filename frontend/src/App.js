@@ -9,6 +9,7 @@ import HomePage from "./components/HomePage/HomePage";
 import SpotsFormPage from "./components/SpotsFormPage/SpotsFormPage";
 import SpotReadOne from "./components/SpotReadOne/SpotReadOne";
 import SpotsViewAll from "./components/SpotsViewAll/SpotsViewAll";
+import SpotEdit from "./components/SpotEdit/SpotEdit";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,12 +35,16 @@ function App() {
           <Route path={"/spots/new"}>
             <SpotsFormPage />
           </Route>
-          <Route path={"/spots/:id"}>
+          <Route exact path={"/spots/:id"}>
             <SpotReadOne />
           </Route>
-          <Route path={"/spots/"}>
+          <Route exact path={"/spots/"}>
             <SpotsViewAll />
           </Route>
+          <Route path={"/spots/edit/:id"}>
+            <SpotEdit />
+          </Route>
+          <Route>Page Not Found</Route>
         </Switch>
       )}
     </>
