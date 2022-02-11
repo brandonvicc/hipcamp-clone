@@ -10,8 +10,6 @@ const SpotReadOne = () => {
   const bookings = useSelector((state) => state.booking);
   const spot = spots[id];
 
-  console.log(bookings);
-
   useEffect(() => {
     dispatch(bookingActions.getBookings(id));
   }, [dispatch, id]);
@@ -22,7 +20,7 @@ const SpotReadOne = () => {
       <p>{spot.name}</p>
 
       <ul>
-        {bookings?.list.map((books) => (
+        {bookings.list?.map((books) => (
           <li key={books.id}>{books.id}</li>
         ))}
       </ul>
