@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
-const { Booking } = require("../../db/models");
+const { Booking, Spot, User } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth, restoreUser } = require("../../utils/auth");
 
@@ -18,7 +18,11 @@ router.get(
   "/spots/:id",
   asyncHandler(async (req, res) => {
     const id = req.params.id;
-    const spotBookings = await Booking.getAllFromSpot(id);
+    const spotBookings = await Booking.findAll({
+      where: { spot_id: id },
+      include: [Spot, User],
+    });
+    console.log(spotBookings[0].User);
     return res.json(spotBookings);
   })
 );
@@ -31,11 +35,9 @@ const bookingValidations = [
     .withMessage("Must book at a existing camping spot."),
   check("startDate")
     .exists({ checkFalsy: true })
-    .isLength({ min: 7, max: 8 })
     .withMessage("Must be a valid date."),
   check("endDate")
     .exists({ checkFalsy: true })
-    .isLength({ min: 7, max: 8 })
     .withMessage("Must be a valid date."),
   check("guests")
     .exists({ checkFalsy: true })

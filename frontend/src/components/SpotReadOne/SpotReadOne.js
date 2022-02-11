@@ -16,8 +16,17 @@ const SpotReadOne = () => {
 
   return (
     <div className="spot-one-container">
-      <h1>Your new Spot</h1>
-      <p>{spot.name}</p>
+      <h1>{spot.name}</h1>
+      <div className="spot-info-container">
+        <img src={spot.img_link} alt="campsite" />
+        <p>{spot.address}</p>
+        <p>
+          {spot.city}, {spot.state} {spot.country}
+        </p>
+        <p>${spot.price} per night</p>
+        <p>{spot.lat}</p>
+        <p>{spot.lng}</p>
+      </div>
 
       <ul>
         {bookings.list?.map((books) => (
