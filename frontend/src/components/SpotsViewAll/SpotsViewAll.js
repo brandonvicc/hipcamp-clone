@@ -9,6 +9,10 @@ const SpotsViewAll = () => {
 
   const dispatch = useDispatch();
 
+  const dateNew = new Date();
+  console.log(dateNew);
+  console.log(typeof dateNew);
+
   useEffect(() => {
     dispatch(spotActions.getSpots());
   }, [dispatch]);
