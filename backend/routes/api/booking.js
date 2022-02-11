@@ -23,9 +23,31 @@ router.get(
   })
 );
 
+const bookingValidations = [
+  check("spot_id")
+    .isInt({ gt: 0 })
+    .withMessage("Must choose a camping spot.")
+    .exists({ checkFalsy: true })
+    .withMessage("Must book at a existing camping spot."),
+  check("startDate")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 7, max: 8 })
+    .withMessage("Must be a valid date."),
+  check("endDate")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 7, max: 8 })
+    .withMessage("Must be a valid date."),
+  check("guests")
+    .exists({ checkFalsy: true })
+    .isInt({ gt: 0 })
+    .withMessage("Must have at least 1 guest to book."),
+  handleValidationErrors,
+];
+
 router.post(
   "/",
   requireAuth,
+  bookingValidations,
   restoreUser,
   asyncHandler(async (req, res) => {
     const { user } = req;
