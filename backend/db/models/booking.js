@@ -1,4 +1,6 @@
 "use strict";
+const { Spot } = require("./spot");
+
 module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define(
     "Booking",
@@ -32,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Booking.getAllFromSpot = async function (spot_id) {
-    return Booking.findAll({ where: { spot_id } });
+    return await Booking.findAll({ where: { spot_id }, include: Spot });
   };
 
   Booking.createBooking = async function ({
@@ -50,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       guests,
     });
 
-    return Booking.findByPk(newBook.id);
+    return await Booking.findByPk(newBook.id);
   };
 
   Booking.associate = function (models) {

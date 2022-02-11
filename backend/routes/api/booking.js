@@ -19,6 +19,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = req.params.id;
     const spotBookings = await Booking.getAllFromSpot(id);
+    console.log(spotBookings.Spot);
     return res.json(spotBookings);
   })
 );
