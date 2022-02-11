@@ -57,8 +57,6 @@ router.post(
   asyncHandler(async (req, res) => {
     const { user } = req;
 
-    console.log(user.dataValues.id);
-
     const { address, city, state, country, lat, lng, name, price, img_link } =
       req.body;
     const spot = await Spot.createSpot({
