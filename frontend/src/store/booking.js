@@ -18,7 +18,6 @@ export const getBookings = (spotId) => async (dispatch, getState) => {
 
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
     dispatch(loadAll(data));
     return data;
   }
