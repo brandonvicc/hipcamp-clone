@@ -1,40 +1,87 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import * as bookingActions from "../../store/booking";
+import { useHistory } from "react-router-dom";
 
 const HomeBookForm = () => {
-  const [location, setLocation] = useState("");
-  const [date, setDate] = useState();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const spotsList = useSelector((state) => state.spot.list);
+  const sessionUser = useSelector((state) => state.session.user);
+  const [spots, setSpots] = useState(0);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [numGuest, setNumGuest] = useState(1);
-  const handleSubmit = (e) => {
+  const [errors, setErrors] = useState([]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    //handle request to book campspot
+    setErrors([]);
+    return dispatch(
+      bookingActions.createBooking({
+        spot_id: spots,
+        user_id: sessionUser.id,
+        startDate,
+        endDate,
+        guests: numGuest,
+      })
+    )
+      .then((data) => {
+        history.push(`/spots/${data.spot_id}`);
+      })
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   };
+
   return (
     <div className="home-book-form-container">
+      <ul>
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
       <form onSubmit={handleSubmit} className="home-book-form">
         <div className="home-form-input-container">
-          <label htmlFor="location">WHERE TO?</label>
-          <input
-            type="text"
-            name="location"
-            placeholder="Please put name of location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
+          <label htmlFor="spots">WHERE TO?</label>
+          <select
+            name="spot"
+            id="spot"
+            onChange={(e) => setSpots(e.target.value)}
+            value={spots}
+          >
+            <option value={0}>Please Select a Campsite</option>
+            {spotsList?.map((spot) => (
+              <option key={spot.id} value={spot.id}>
+                {spot.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="home-form-input-container">
-          <label htmlFor="date">DATE</label>
+          <label htmlFor="date">START DATE</label>
           <input
             type="date"
             name="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
         <div className="home-form-input-container">
-          <label htmlFor="numGuest">HOW MANY GUESTS?</label>
+          <label htmlFor="date"> END DATE</label>
+          <input
+            type="date"
+            name="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
+        <div className="home-form-input-container">
+          <label htmlFor="guests">HOW MANY GUESTS?</label>
           <input
             type="number"
-            name="numGuest"
+            name="guests"
             value={numGuest}
             onChange={(e) => setNumGuest(e.target.value)}
           />
