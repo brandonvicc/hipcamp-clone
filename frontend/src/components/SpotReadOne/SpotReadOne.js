@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import * as bookingActions from "../../store/booking";
+import * as spotActions from "../../store/spot";
+import "./SpotReadOne.css";
 
 const SpotReadOne = () => {
   const { id } = useParams();
@@ -10,29 +12,127 @@ const SpotReadOne = () => {
   const bookings = useSelector((state) => state.booking);
   const spot = spots[id];
 
+  const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [numGuest, setNumGuest] = useState(1);
+  const [errors, setErrors] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      bookingActions.createBooking({
+        spot_id: spot.id,
+        user_id: sessionUser.id,
+        startDate,
+        endDate,
+        guests: numGuest,
+      })
+    )
+      .then((data) => {
+        setStartDate("");
+        setEndDate("");
+        alert("Your request was booked!");
+        history.push(`/spots`);
+      })
+      .catch(async (res) => {
+        console.log(res);
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
+  };
+
   useEffect(() => {
+    dispatch(spotActions.getSpots());
     dispatch(bookingActions.getBookings(id));
   }, [dispatch, id]);
 
   return (
     <div className="spot-one-container">
-      <h1>{spot.name}</h1>
+      <h1 className="pageHeader">{spot.name}</h1>
       <div className="spot-info-container">
-        <img src={spot.img_link} alt="campsite" />
-        <p>{spot.address}</p>
-        <p>
-          {spot.city}, {spot.state} {spot.country}
-        </p>
-        <p>${spot.price} per night</p>
-        <p>{spot.lat}</p>
-        <p>{spot.lng}</p>
+        <div className="spot-info-img-container">
+          <img className="spot-one-img" src={spot.img_link} alt="campsite" />
+          <p className="spot-one-price">${spot.price} per night</p>
+        </div>
+        <div className="spot-info-content-container">
+          <div className="location-container">
+            <h3>Street Address:</h3>
+            <p>{spot.address}</p>
+            <h3>City, State Country:</h3>
+            <p>
+              {spot.city}, {spot.state} {spot.country}
+            </p>
+            <h3>Coordinates (Lat, Long):</h3>
+            <p>
+              {spot.lat}, {spot.lng}
+            </p>
+          </div>
+          <div className="host-info-container">
+            <h3>Hosted by:</h3>
+            <p>{spot.User.username}</p>
+          </div>
+        </div>
       </div>
-
-      <ul>
-        {bookings.list?.map((books) => (
-          <li key={books.id}>{books.id}</li>
-        ))}
-      </ul>
+      <div id="booking-table-container">
+        <table className="booking-table">
+          <tr className="booking-headers-row">
+            <th className="booking-headers border-r">Camper</th>
+            <th className="booking-headers border-r">Start Date</th>
+            <th className="booking-headers border-r">End Date</th>
+            <th className="booking-headers">Guests</th>
+          </tr>
+          {bookings.list?.map((books) => (
+            <tr className="booking-info-row" key={books.id}>
+              <td className="booking-info border-r">{books.User.username}</td>
+              <td className="booking-info border-r">{books.startDate}</td>
+              <td className="booking-info border-r">{books.endDate}</td>
+              <td className="booking-info">{books.guests}</td>
+            </tr>
+          ))}
+        </table>
+      </div>
+      <div className="booking-form-container">
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+        <form onSubmit={handleSubmit} className="home-book-form">
+          <div className="home-form-input-container">
+            <label htmlFor="date">START DATE</label>
+            <input
+              type="date"
+              name="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </div>
+          <div className="home-form-input-container">
+            <label htmlFor="date"> END DATE</label>
+            <input
+              type="date"
+              name="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </div>
+          <div className="home-form-input-container">
+            <label htmlFor="guests">HOW MANY GUESTS?</label>
+            <input
+              type="number"
+              name="guests"
+              value={numGuest}
+              onChange={(e) => setNumGuest(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="search-spot-btn">
+            <i className="fas fa-search" id="search-spot-btn-icon"></i>
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

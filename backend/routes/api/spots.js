@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
-const { Spot } = require("../../db/models");
+const { Spot, User } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth, restoreUser } = require("../../utils/auth");
 
@@ -79,7 +79,7 @@ router.post(
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const allSpots = await Spot.getAll();
+    const allSpots = await Spot.findAll({ include: User });
     return res.json(allSpots);
   })
 );

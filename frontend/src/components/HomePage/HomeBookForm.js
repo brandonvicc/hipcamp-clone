@@ -53,7 +53,11 @@ const HomeBookForm = () => {
           >
             <option value={0}>Please Select a Campsite</option>
             {spotsList?.map((spot) => (
-              <option key={spot.id} value={spot.id}>
+              <option
+                className="campsite-options"
+                key={spot.id}
+                value={spot.id}
+              >
                 {spot.name}
               </option>
             ))}
