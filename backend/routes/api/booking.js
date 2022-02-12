@@ -20,9 +20,8 @@ router.get(
     const id = req.params.id;
     const spotBookings = await Booking.findAll({
       where: { spot_id: id },
-      include: [Spot, User],
+      include: [{ model: Spot, include: User }, User],
     });
-    console.log(spotBookings[0].User);
     return res.json(spotBookings);
   })
 );

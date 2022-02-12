@@ -30,7 +30,8 @@
   font-weight: 600;
 }
 
-.home-book-form-container input {
+.home-book-form-container input,
+.home-book-form-container select {
   width: 250px;
   border: none;
   border-radius: 25px;

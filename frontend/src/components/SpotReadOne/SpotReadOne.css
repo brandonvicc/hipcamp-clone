@@ -1,0 +1,64 @@
+.spot-one-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.spot-info-img-container {
+  width: 500px;
+  margin: 50px auto;
+  position: relative;
+}
+
+.spot-one-img {
+  width: 100%;
+}
+
+.spot-one-price {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  color: rgba(0, 197, 133, 1);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.spot-info-content-container {
+  margin: 0 auto;
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-table-container {
+  margin: 50px auto;
+}
+
+.booking-table {
+  width: 100%;
+}
+
+.booking-headers {
+  font-size: 1.4em;
+}
+
+.booking-headers,
+.booking-info {
+  text-align: center;
+
+  padding: 10px;
+}
+
+.border-r {
+  border-right: 1px solid black;
+}
+
+.booking-info-row:hover {
+  background-color: white;
+}
+
+#booking-form-container {
+  margin-bottom: 200px;
+}

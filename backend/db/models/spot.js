@@ -1,4 +1,5 @@
 "use strict";
+const { User } = require("./user");
 module.exports = (sequelize, DataTypes) => {
   const Spot = sequelize.define(
     "Spot",
@@ -84,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Spot.getAll = async function () {
-    return await Spot.findAll();
+    return await Spot.findAll({ include: User });
   };
 
   Spot.getOne = async function (id) {
