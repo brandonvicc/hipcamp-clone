@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { check } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
-const { Spot, User } = require("../../db/models");
+const { Spot, User, Booking } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth, restoreUser } = require("../../utils/auth");
 
@@ -87,8 +87,10 @@ router.get(
 
 router.delete(
   "/:id",
-  requireAuth,
   asyncHandler(async (req, res) => {
+    await Booking.destroy({
+      where: { spot_id: req.params.id },
+    });
     const deletedSpot = await Spot.deleteSpot(req.params.id);
     return res.json(deletedSpot);
   })
