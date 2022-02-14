@@ -42,15 +42,13 @@ const SpotCard = ({ spot }) => {
             <li>More Details</li>
           </NavLink>
           {sessionUser?.id === user_id && (
-            <li>
+            <li className="action-btns">
               <button className="delete-spot" onClick={handleClick}>
                 Delete
               </button>
-              {/* <NavLink to={`/spots/edit/${id}`}> */}
               <button className="update-spot" onClick={editClick}>
                 Edit
               </button>
-              {/* </NavLink> */}
             </li>
           )}
         </ul>

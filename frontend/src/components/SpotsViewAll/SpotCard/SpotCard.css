@@ -17,6 +17,7 @@
 
 .spot-card-img {
   width: 300px;
+  height: 200px;
 }
 
 .spot-card-content a {
@@ -26,4 +27,8 @@
 
 .spot-card-content a:hover {
   color: rgba(0, 197, 133, 1);
+}
+
+.action-btns {
+  margin-top: 20px;
 }

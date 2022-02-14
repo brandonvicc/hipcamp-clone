@@ -66,7 +66,7 @@ const SpotEdit = () => {
   return (
     <div>
       <h1>Edit a Spot</h1>
-      <ul>
+      <ul className="error-list">
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}

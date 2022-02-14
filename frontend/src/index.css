@@ -14,3 +14,10 @@ body {
   margin-top: 50px;
   font-size: 2.5em;
 }
+
+.error-list {
+  color: red;
+  list-style: none;
+  font-weight: 600;
+  text-align: center;
+}

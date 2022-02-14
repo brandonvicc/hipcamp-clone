@@ -40,7 +40,7 @@ function LoginFormPage() {
     <>
       <h1 className="pageHeader">Log In!</h1>
       <form onSubmit={handleSubmit} className="loginForm">
-        <ul>
+        <ul className="error-list">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}

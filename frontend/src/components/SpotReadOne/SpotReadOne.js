@@ -96,20 +96,21 @@ const SpotReadOne = () => {
               <td className="booking-info border-r">{books.startDate}</td>
               <td className="booking-info border-r">{books.endDate}</td>
               <td className="booking-info">{books.guests}</td>
-              {sessionUser && sessionUser.id === books.user_id}
-              <button
-                className="delete-book"
-                onClick={handleClick}
-                value={books.id}
-              >
-                Delete
-              </button>
+              {sessionUser.id === books.user_id && (
+                <button
+                  className="delete-book"
+                  onClick={handleClick}
+                  value={books.id}
+                >
+                  Delete
+                </button>
+              )}
             </tr>
           ))}
         </table>
       </div>
       <div className="booking-form-container">
-        <ul>
+        <ul className="error-list">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
