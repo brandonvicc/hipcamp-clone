@@ -69,7 +69,7 @@ router.delete(
   "/:id",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const deletedBook = await Book.deleteBook(req.params.id);
+    const deletedBook = await Booking.deleteBook(req.params.id);
     return res.json(deletedBook);
   })
 );

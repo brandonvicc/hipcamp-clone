@@ -38,10 +38,16 @@ const SpotReadOne = () => {
         history.push(`/spots`);
       })
       .catch(async (res) => {
-        console.log(res);
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    await dispatch(bookingActions.deleteBook(e.target.value));
+    history.push("/spots");
   };
 
   useEffect(() => {
@@ -90,6 +96,14 @@ const SpotReadOne = () => {
               <td className="booking-info border-r">{books.startDate}</td>
               <td className="booking-info border-r">{books.endDate}</td>
               <td className="booking-info">{books.guests}</td>
+              {sessionUser && sessionUser.id === books.user_id}
+              <button
+                className="delete-book"
+                onClick={handleClick}
+                value={books.id}
+              >
+                Delete
+              </button>
             </tr>
           ))}
         </table>
