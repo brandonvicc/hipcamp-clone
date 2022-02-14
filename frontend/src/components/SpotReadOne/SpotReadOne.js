@@ -45,7 +45,6 @@ const SpotReadOne = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     await dispatch(bookingActions.deleteBook(e.target.value));
     history.push("/spots");
   };
