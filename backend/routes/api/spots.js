@@ -59,7 +59,7 @@ router.post(
 
     const { address, city, state, country, lat, lng, name, price, img_link } =
       req.body;
-    const spot = await Spot.createSpot({
+    const newSpot = await Spot.create({
       address,
       city,
       state,
@@ -68,9 +68,10 @@ router.post(
       lng,
       name,
       price,
-      user_id: user.dataValues.id,
+      user_id: user.id,
       img_link,
     });
+    const spot = await Spot.findByPk(newSpot.id, { include: User });
 
     return res.json({ spot });
   })
@@ -87,7 +88,6 @@ router.get(
 router.delete(
   "/:id",
   requireAuth,
-  spotValidation,
   asyncHandler(async (req, res) => {
     const deletedSpot = await Spot.deleteSpot(req.params.id);
     return res.json(deletedSpot);
