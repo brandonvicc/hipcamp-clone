@@ -55,6 +55,12 @@ module.exports = (sequelize, DataTypes) => {
     return await Booking.findByPk(newBook.id);
   };
 
+  Booking.deleteBook = async function (id) {
+    const book = await Booking.findByPk(id);
+    if (!book) throw new Error("No Book with that id");
+    await Booking.destroy({ where: { id } });
+  };
+
   Booking.associate = function (models) {
     // associations can be defined here
     Booking.belongsTo(models.Spot, { foreignKey: "spot_id" });

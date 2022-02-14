@@ -62,3 +62,13 @@
 #booking-form-container {
   margin-bottom: 200px;
 }
+
+.delete-book {
+  border: none;
+  background-color: rgba(255, 0, 0, 1);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100px;
+}
