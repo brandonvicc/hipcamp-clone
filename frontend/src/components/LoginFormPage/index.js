@@ -25,6 +25,17 @@ function LoginFormPage() {
     );
   };
 
+  const handleDemo = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      sessionActions.login({ credential: "demouser", password: "password" })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
+
   return (
     <>
       <h1 className="pageHeader">Log In!</h1>
@@ -56,6 +67,11 @@ function LoginFormPage() {
           Log In
         </button>
       </form>
+      <div className="demo-login-container">
+        <button className="demo-login-btn" onClick={handleDemo}>
+          Demo
+        </button>
+      </div>
     </>
   );
 }

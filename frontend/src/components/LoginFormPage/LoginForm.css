@@ -43,3 +43,18 @@ label input:focus {
   border-radius: 5px;
   width: 100px;
 }
+
+.demo-login-btn {
+  border: none;
+  background-color: rgba(0, 197, 133, 1);
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100px;
+}
+
+.demo-login-container {
+  width: 100px;
+  margin: -50px auto;
+}
