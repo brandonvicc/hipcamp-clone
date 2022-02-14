@@ -37,7 +37,7 @@ const HomeBookForm = () => {
 
   return (
     <div className="home-book-form-container">
-      <ul>
+      <ul className="error-list">
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}

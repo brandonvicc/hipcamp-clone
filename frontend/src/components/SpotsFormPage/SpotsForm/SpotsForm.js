@@ -49,7 +49,7 @@ const SpotsForm = () => {
 
   return (
     <div className="spot-form-marginbtm">
-      <ul>
+      <ul className="error-list">
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
