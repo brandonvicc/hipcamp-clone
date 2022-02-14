@@ -80,7 +80,10 @@ router.post(
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const allSpots = await Spot.findAll({ include: User });
+    const allSpots = await Spot.findAll({
+      include: User,
+      order: [["createdAt", "DESC"]],
+    });
     return res.json(allSpots);
   })
 );

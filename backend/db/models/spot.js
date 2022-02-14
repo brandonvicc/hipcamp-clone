@@ -85,7 +85,10 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Spot.getAll = async function () {
-    return await Spot.findAll({ include: User });
+    return await Spot.findAll({
+      include: User,
+      order: [["createdAt", "DESC"]],
+    });
   };
 
   Spot.getOne = async function (id) {
