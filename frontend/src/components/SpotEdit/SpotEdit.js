@@ -10,24 +10,86 @@ const SpotEdit = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const spot = useSelector((state) => state.spot);
 
-  const [name, setName] = useState(spot.name);
-  const [address, setAddress] = useState(spot.address);
-  const [city, setCity] = useState(spot.city);
-  const [state, setState] = useState(spot.state);
-  const [country, setCountry] = useState(spot.country);
-  const [price, setPrice] = useState(spot.price);
-  const [lat, setLat] = useState(spot.lat);
-  const [lng, setLng] = useState(spot.lng);
-  const [img_link, setImgLink] = useState(spot.img_link);
+  const [name, setName] = useState(spot?.name);
+  const [address, setAddress] = useState(spot?.address);
+  const [city, setCity] = useState(spot?.city);
+  const [state, setState] = useState(spot?.state);
+  const [country, setCountry] = useState(spot?.country);
+  const [price, setPrice] = useState(spot?.price);
+  const [lat, setLat] = useState(spot?.lat);
+  const [lng, setLng] = useState(spot?.lng);
+  const [img_link, setImgLink] = useState(spot?.img_link);
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser.id !== spot.user_id) <Redirect to="/" />;
+  if (sessionUser.id !== spot?.user_id) <Redirect to="/" />;
 
   let loaded = false;
 
   useEffect(() => {
     dispatch(spotActions.loadOne(id));
   }, [dispatch, id, loaded]);
+
+  const states = [
+    "Alabama",
+    "Alaska",
+    "American Samoa",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District of Columbia",
+    "Federated States of Micronesia",
+    "Florida",
+    "Georgia",
+    "Guam",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Marshall Islands",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Northern Mariana Islands",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Palau",
+    "Pennsylvania",
+    "Puerto Rico",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virgin Island",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ];
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -106,13 +168,20 @@ const SpotEdit = () => {
         </div>
         <div className="spot-form-input-container spot-state">
           <label htmlFor="state">State</label>
-          <input
+          <select
             value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="spots-input-control"
-            type="text"
             name="state"
-          />
+            id="state"
+            onChange={(e) => setState(e.target.value)}
+            required
+            className="spots-input-control"
+          >
+            {states.map((state, idx) => (
+              <option key={idx} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="spot-form-input-container spot-country">
           <label htmlFor="country">Country</label>

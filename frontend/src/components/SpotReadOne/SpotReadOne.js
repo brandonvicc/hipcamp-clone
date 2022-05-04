@@ -89,17 +89,17 @@ const SpotReadOne = () => {
             <th className="booking-headers border-r">End Date</th>
             <th className="booking-headers">Guests</th>
           </tr>
-          {bookings.list?.map((books) => (
-            <tr className="booking-info-row" key={books.id}>
-              <td className="booking-info border-r">{books.User.username}</td>
-              <td className="booking-info border-r">{books.startDate}</td>
-              <td className="booking-info border-r">{books.endDate}</td>
-              <td className="booking-info">{books.guests}</td>
-              {sessionUser.id === books.user_id && (
+          {bookings?.list?.map((books) => (
+            <tr className="booking-info-row" key={books?.id}>
+              <td className="booking-info border-r">{books?.User.username}</td>
+              <td className="booking-info border-r">{books?.startDate}</td>
+              <td className="booking-info border-r">{books?.endDate}</td>
+              <td className="booking-info">{books?.guests}</td>
+              {sessionUser.id === books?.user_id && (
                 <button
                   className="delete-book"
                   onClick={handleClick}
-                  value={books.id}
+                  value={books?.id}
                 >
                   Delete
                 </button>
