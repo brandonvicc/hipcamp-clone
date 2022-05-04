@@ -11,13 +11,75 @@ const SpotsForm = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
+  const [state, setState] = useState("Alabama");
+  const [country, setCountry] = useState("USA");
   const [price, setPrice] = useState(0.0);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
   const [img_link, setImgLink] = useState("");
   const [errors, setErrors] = useState([]);
+
+  const states = [
+    "Alabama",
+    "Alaska",
+    "American Samoa",
+    "Arizona",
+    "Arkansas",
+    "California",
+    "Colorado",
+    "Connecticut",
+    "Delaware",
+    "District of Columbia",
+    "Federated States of Micronesia",
+    "Florida",
+    "Georgia",
+    "Guam",
+    "Hawaii",
+    "Idaho",
+    "Illinois",
+    "Indiana",
+    "Iowa",
+    "Kansas",
+    "Kentucky",
+    "Louisiana",
+    "Maine",
+    "Marshall Islands",
+    "Maryland",
+    "Massachusetts",
+    "Michigan",
+    "Minnesota",
+    "Mississippi",
+    "Missouri",
+    "Montana",
+    "Nebraska",
+    "Nevada",
+    "New Hampshire",
+    "New Jersey",
+    "New Mexico",
+    "New York",
+    "North Carolina",
+    "North Dakota",
+    "Northern Mariana Islands",
+    "Ohio",
+    "Oklahoma",
+    "Oregon",
+    "Palau",
+    "Pennsylvania",
+    "Puerto Rico",
+    "Rhode Island",
+    "South Carolina",
+    "South Dakota",
+    "Tennessee",
+    "Texas",
+    "Utah",
+    "Vermont",
+    "Virgin Island",
+    "Virginia",
+    "Washington",
+    "West Virginia",
+    "Wisconsin",
+    "Wyoming",
+  ];
 
   if (!sessionUser) return <Redirect to="/login" />;
 
@@ -89,13 +151,20 @@ const SpotsForm = () => {
         </div>
         <div className="spot-form-input-container spot-state">
           <label htmlFor="state">State</label>
-          <input
+          <select
             value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="spots-input-control"
-            type="text"
             name="state"
-          />
+            id="state"
+            onChange={(e) => setState(e.target.value)}
+            required
+            className="spots-input-control"
+          >
+            {states.map((state, idx) => (
+              <option key={idx} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="spot-form-input-container spot-country">
           <label htmlFor="country">Country</label>
