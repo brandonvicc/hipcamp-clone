@@ -38,13 +38,17 @@
 }
 
 #spots-long-input-name {
-  width: 98%;
+  min-width: 98%;
 }
 #spots-long-input-address {
-  width: 98%;
+  min-width: 98%;
 }
 #spots-long-input-imgLink {
-  width: 98%;
+  min-width: 98%;
+}
+
+#state{
+  border-radius: 25px;
 }
 
 .spot-name {

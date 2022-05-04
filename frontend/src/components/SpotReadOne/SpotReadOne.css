@@ -72,3 +72,10 @@
   border-radius: 5px;
   width: 100px;
 }
+
+input {
+  max-width: 250px;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+}

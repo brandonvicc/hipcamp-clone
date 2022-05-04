@@ -24,7 +24,7 @@ const SpotReadOne = () => {
     setErrors([]);
     return dispatch(
       bookingActions.createBooking({
-        spot_id: spot.id,
+        spot_id: spot?.id,
         user_id: sessionUser.id,
         startDate,
         endDate,
@@ -56,28 +56,28 @@ const SpotReadOne = () => {
 
   return (
     <div className="spot-one-container">
-      <h1 className="pageHeader">{spot.name}</h1>
+      <h1 className="pageHeader">{spot?.name}</h1>
       <div className="spot-info-container">
         <div className="spot-info-img-container">
-          <img className="spot-one-img" src={spot.img_link} alt="campsite" />
-          <p className="spot-one-price">${spot.price} per night</p>
+          <img className="spot-one-img" src={spot?.img_link} alt="campsite" />
+          <p className="spot-one-price">${spot?.price} per night</p>
         </div>
         <div className="spot-info-content-container">
           <div className="location-container">
             <h3>Street Address:</h3>
-            <p>{spot.address}</p>
+            <p>{spot?.address}</p>
             <h3>City, State Country:</h3>
             <p>
-              {spot.city}, {spot.state} {spot.country}
+              {spot?.city}, {spot?.state} {spot?.country}
             </p>
             <h3>Coordinates (Lat, Long):</h3>
             <p>
-              {spot.lat}, {spot.lng}
+              {spot?.lat}, {spot?.lng}
             </p>
           </div>
           <div className="host-info-container">
             <h3>Hosted by:</h3>
-            <p>{spot.User.username}</p>
+            <p>{spot?.User.username}</p>
           </div>
         </div>
       </div>
