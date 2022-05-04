@@ -43,6 +43,18 @@ const SpotReadOne = () => {
       });
   };
 
+  const deleteClick = async (e) => {
+    e.preventDefault();
+    await dispatch(spotActions.deleteSpot(spot));
+    history.push("/spots");
+  };
+
+  const editClick = async (e) => {
+    e.preventDefault();
+    await dispatch(spotActions.loadOne(id));
+    history.push(`/spots/edit/${id}`);
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
     await dispatch(bookingActions.deleteBook(e.target.value));
@@ -53,6 +65,20 @@ const SpotReadOne = () => {
     dispatch(spotActions.getSpots());
     dispatch(bookingActions.getBookings(id));
   }, [dispatch, id]);
+
+  let actions;
+  if (spot?.user_id === sessionUser?.id) {
+    actions = (
+      <>
+        <button className="delete-spot" onClick={deleteClick}>
+          Delete
+        </button>
+        <button className="update-spot" onClick={editClick}>
+          Edit
+        </button>
+      </>
+    );
+  }
 
   return (
     <div className="spot-one-container">
@@ -78,6 +104,7 @@ const SpotReadOne = () => {
           <div className="host-info-container">
             <h3>Hosted by:</h3>
             <p>{spot?.User.username}</p>
+            {sessionUser && actions}
           </div>
         </div>
       </div>
@@ -95,7 +122,7 @@ const SpotReadOne = () => {
               <td className="booking-info border-r">{books?.startDate}</td>
               <td className="booking-info border-r">{books?.endDate}</td>
               <td className="booking-info">{books?.guests}</td>
-              {sessionUser.id === books?.user_id && (
+              {sessionUser?.id === books?.user_id && (
                 <button
                   className="delete-book"
                   onClick={handleClick}
