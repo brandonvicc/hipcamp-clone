@@ -32,17 +32,28 @@ function SignupFormPage() {
     ]);
   };
 
+  const handleDemo = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      sessionActions.login({ credential: "demouser", password: "password" })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+  };
+
   return (
     <>
       <h1 className="pageHeader">Sign Up!</h1>
-      <form onSubmit={handleSubmit} className="loginForm">
+      <form onSubmit={handleSubmit} className="signupForm">
         <ul className="error-list">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
         <label>
-          Email
+          <div>Email</div>
           <input
             type="text"
             value={email}
@@ -81,6 +92,11 @@ function SignupFormPage() {
           Sign Up
         </button>
       </form>
+      <div className="demo-signup-container">
+        <button className="demo-login-btn" onClick={handleDemo}>
+          Demo
+        </button>
+      </div>
     </>
   );
 }

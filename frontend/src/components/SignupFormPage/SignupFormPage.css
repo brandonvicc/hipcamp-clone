@@ -1,4 +1,4 @@
-.loginForm {
+.signupForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,6 +10,7 @@
   padding: 15px;
   border-radius: 25px;
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+  min-height: fit-content;
 }
 
 label input {
@@ -18,10 +19,16 @@ label input {
   border-radius: 5px;
 }
 
-label input:focus {
+/* label{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+} */
+
+/* label input:focus {
   outline: none;
   border: 2px solid rgba(0, 197, 133, 1);
-}
+} */
 
 .login-btn {
   border: none;
@@ -31,4 +38,9 @@ label input:focus {
   cursor: pointer;
   border-radius: 5px;
   width: 100px;
+}
+
+.demo-signup-container {
+  width: 100px;
+  margin: -50px auto;
 }

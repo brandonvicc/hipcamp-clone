@@ -17,11 +17,11 @@ h1 {
   box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-label {
+/* label {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 
 label input {
   margin-left: 10px;
@@ -29,10 +29,10 @@ label input {
   border-radius: 5px;
 }
 
-label input:focus {
+/* label input:focus {
   outline: none;
   border: 2px solid rgba(0, 197, 133, 1);
-}
+} */
 
 .login-btn {
   border: none;
@@ -56,5 +56,5 @@ label input:focus {
 
 .demo-login-container {
   width: 100px;
-  margin: -50px auto;
+  margin: 0px auto;
 }
