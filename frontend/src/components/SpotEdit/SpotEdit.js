@@ -110,7 +110,7 @@ const SpotEdit = () => {
       })
     )
       .then((data) => {
-        history.push(`/spots`);
+        history.push(`/spots/${data.id}`);
       })
       .catch(async (res) => {
         console.log(res);
