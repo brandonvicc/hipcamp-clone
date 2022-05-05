@@ -103,7 +103,7 @@ const SpotReadOne = () => {
           </div>
           <div className="host-info-container">
             <h3>Hosted by:</h3>
-            <p>{spot?.User.username}</p>
+            <p>{spot?.User?.username}</p>
             {sessionUser && actions}
           </div>
         </div>
