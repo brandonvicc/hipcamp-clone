@@ -118,7 +118,7 @@ const SpotReadOne = () => {
           </tr>
           {bookings?.list?.map((books) => (
             <tr className="booking-info-row" key={books?.id}>
-              <td className="booking-info border-r">{books?.User.username}</td>
+              <td className="booking-info border-r">{books?.User?.username}</td>
               <td className="booking-info border-r">{books?.startDate}</td>
               <td className="booking-info border-r">{books?.endDate}</td>
               <td className="booking-info">{books?.guests}</td>
