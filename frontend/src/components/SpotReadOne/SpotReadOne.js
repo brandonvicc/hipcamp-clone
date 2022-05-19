@@ -21,12 +21,13 @@ const SpotReadOne = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(sessionUser);
     if (!sessionUser) history.push("/login");
     setErrors([]);
     return dispatch(
       bookingActions.createBooking({
         spot_id: spot?.id,
-        user_id: sessionUser.id,
+        user_id: sessionUser?.id,
         startDate,
         endDate,
         guests: numGuest,
