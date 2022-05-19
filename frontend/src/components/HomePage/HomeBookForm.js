@@ -20,7 +20,7 @@ const HomeBookForm = () => {
     return dispatch(
       bookingActions.createBooking({
         spot_id: spots,
-        user_id: sessionUser.id,
+        user_id: sessionUser?.id,
         startDate,
         endDate,
         guests: numGuest,

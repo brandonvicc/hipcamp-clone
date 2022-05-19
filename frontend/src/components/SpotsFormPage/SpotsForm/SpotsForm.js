@@ -97,7 +97,7 @@ const SpotsForm = () => {
         lng,
         price,
         img_link,
-        user_id: sessionUser.id,
+        user_id: sessionUser?.id,
       })
     )
       .then((data) => {
