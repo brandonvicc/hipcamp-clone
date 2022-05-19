@@ -31,11 +31,11 @@ const SpotReadOne = () => {
         guests: numGuest,
       })
     )
-      .then((data) => {
+      .then(async (data) => {
         setStartDate("");
         setEndDate("");
         alert("Your request was booked!");
-        history.push(`/spots`);
+        await dispatch(bookingActions.getBookings(id));
       })
       .catch(async (res) => {
         const data = await res.json();
@@ -46,7 +46,7 @@ const SpotReadOne = () => {
   const deleteClick = async (e) => {
     e.preventDefault();
     await dispatch(spotActions.deleteSpot(spot));
-    history.push("/spots");
+    history.push(`/spots`);
   };
 
   const editClick = async (e) => {
@@ -58,7 +58,7 @@ const SpotReadOne = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     await dispatch(bookingActions.deleteBook(e.target.value));
-    history.push("/spots");
+    await dispatch(bookingActions.getBookings(id));
   };
 
   useEffect(() => {
