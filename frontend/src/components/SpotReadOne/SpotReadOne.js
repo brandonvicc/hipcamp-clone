@@ -21,6 +21,7 @@ const SpotReadOne = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!sessionUser) history.push("/login");
     setErrors([]);
     return dispatch(
       bookingActions.createBooking({
