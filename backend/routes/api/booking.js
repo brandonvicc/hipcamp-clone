@@ -38,6 +38,26 @@ const bookingValidations = [
   check("endDate")
     .exists({ checkFalsy: true })
     .withMessage("Must be a valid date."),
+  check("endDate")
+    .custom((value, { req }) => {
+      console.log(
+        "\n\n\n",
+        Date.parse(req.body.startDate),
+        "\n",
+        Date.parse(req.body.endDate),
+        "\n\n\n"
+      );
+
+      if (Date.parse(req.body.startDate) > Date.parse(req.body.endDate))
+        throw new Error(
+          "End date must be scheduled at future date or same date from start date."
+        );
+
+      return true;
+    })
+    .withMessage(
+      "End date must be scheduled at future date or same date from start date."
+    ),
   check("guests")
     .exists({ checkFalsy: true })
     .isInt({ gt: 0 })
