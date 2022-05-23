@@ -32,9 +32,37 @@ const getOnespot = (spot) => ({
 });
 
 export const createSpot = (payload) => async (dispatch, getState) => {
+  const {
+    name,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    price,
+    img_link,
+    user_id,
+  } = payload;
+
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("address", address);
+  formData.append("city", city);
+  formData.append("state", state);
+  formData.append("country", country);
+  formData.append("lat", lat);
+  formData.append("lng", lng);
+  formData.append("price", price);
+  formData.append("user_id", user_id);
+  if (img_link) formData.append("img_link", img_link);
+
   const response = await csrfFetch("/api/spots/", {
     method: "POST",
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
   });
 
   if (response.ok) {
@@ -72,9 +100,41 @@ export const deleteSpot = (spot) => async (dispatch, getState) => {
 };
 
 export const updateSpot = (payload) => async (dispatch, getState) => {
+  const {
+    id,
+    name,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    price,
+    img_link,
+    user_id,
+  } = payload;
+
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("name", name);
+  formData.append("address", address);
+  formData.append("city", city);
+  formData.append("state", state);
+  formData.append("country", country);
+  formData.append("lat", lat);
+  formData.append("lng", lng);
+  formData.append("price", price);
+  formData.append("user_id", user_id);
+  if (img_link) formData.append("img_link", img_link);
+  console.log("\n\n\n", formData);
+  console.log(payload, "\n\n\n");
+
   const response = await csrfFetch(`/api/spots/${payload.id}`, {
     method: "PUT",
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    body: formData,
   });
 
   if (response.ok) {
