@@ -16,7 +16,7 @@ const SpotsForm = () => {
   const [price, setPrice] = useState(0.0);
   const [lat, setLat] = useState(0);
   const [lng, setLng] = useState(0);
-  const [img_link, setImgLink] = useState("");
+  const [img_link, setImgLink] = useState(null);
   const [errors, setErrors] = useState([]);
 
   const states = [
@@ -107,6 +107,11 @@ const SpotsForm = () => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       });
+  };
+
+  const updateFile = (e) => {
+    const file = e.target.files[0];
+    if (file) setImgLink(file);
   };
 
   return (
@@ -208,7 +213,7 @@ const SpotsForm = () => {
         </div>
         <div className="spot-form-input-container spot-img">
           <label htmlFor="img_link">Add a Picture</label>
-          <input
+          {/* <input
             value={img_link}
             onChange={(e) => setImgLink(e.target.value)}
             className="spots-input-control"
@@ -216,6 +221,12 @@ const SpotsForm = () => {
             name="img_link"
             placeholder="Please put the link"
             id="spots-long-input-imgLink"
+          /> */}
+          <input
+            type="file"
+            className="spots-input-control"
+            id="spots-long-input-imgLink"
+            onChange={updateFile}
           />
         </div>
         <button type="submit" className="spot-btn">
