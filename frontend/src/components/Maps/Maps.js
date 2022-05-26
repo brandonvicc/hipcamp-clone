@@ -16,7 +16,6 @@ const Maps = ({ apiKey, lat, lng }) => {
     lat: parseInt(lat),
     lng: parseInt(lng),
   };
-  console.log(center);
 
   return (
     <>
