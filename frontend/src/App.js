@@ -10,6 +10,7 @@ import SpotsFormPage from "./components/SpotsFormPage/SpotsFormPage";
 import SpotReadOne from "./components/SpotReadOne/SpotReadOne";
 import SpotsViewAll from "./components/SpotsViewAll/SpotsViewAll";
 import SpotEdit from "./components/SpotEdit/SpotEdit";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
           <Route>Page Not Found</Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

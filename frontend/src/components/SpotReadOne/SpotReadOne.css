@@ -26,10 +26,17 @@
 }
 
 .spot-info-content-container {
-  margin: 0 auto;
-  width: 500px;
+  margin: 0 auto 100px auto;
+  width: 750px;
   display: flex;
   justify-content: space-between;
+}
+
+.action-btns{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around ;
 }
 
 .booking-table-container {
