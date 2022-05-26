@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as bookingActions from "../../store/booking";
 import * as spotActions from "../../store/spot";
 import "./SpotReadOne.css";
+import MapsContainer from "../../components/Maps";
 
 const SpotReadOne = () => {
   const { id } = useParams();
@@ -71,14 +72,14 @@ const SpotReadOne = () => {
   let actions;
   if (spot?.user_id === sessionUser?.id) {
     actions = (
-      <>
+      <div className="action-btns">
         <button className="delete-spot" onClick={deleteClick}>
           Delete
         </button>
         <button className="update-spot" onClick={editClick}>
           Edit
         </button>
-      </>
+      </div>
     );
   }
 
@@ -92,6 +93,8 @@ const SpotReadOne = () => {
         </div>
         <div className="spot-info-content-container">
           <div className="location-container">
+            <h3>Hosted by:</h3>
+            <p>{spot?.User?.username}</p>
             <h3>Street Address:</h3>
             <p>{spot?.address}</p>
             <h3>City, State Country:</h3>
@@ -104,9 +107,8 @@ const SpotReadOne = () => {
             </p>
           </div>
           <div className="host-info-container">
-            <h3>Hosted by:</h3>
-            <p>{spot?.User?.username}</p>
             {sessionUser && actions}
+            <MapsContainer lat={spot?.lat} lng={spot?.lng} />
           </div>
         </div>
       </div>

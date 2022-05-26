@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import spotReducer from "./spot";
 import bookReducer from "./booking";
+import mapsReducer from "./maps";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   spot: spotReducer,
   booking: bookReducer,
+  maps: mapsReducer,
 });
 
 let enhancer;
